@@ -1,0 +1,12 @@
+---
+- name: using tags
+  hosts: all
+   
+  tasks:
+    - name: creating multiple users using with_items loop
+      user: name={{ item }} state=present
+      with_items:
+       - user1
+       - user2
+       - user3
+       - user4

@@ -1,0 +1,9 @@
+---
+- name: testing jinja templte
+  hosts: redhat
+  tasks:
+  - name: testing jinja remplate
+    template:
+       src: /root/ansible-playbooks/sshd_config.j2
+       dest: /etc/ssh/sshd_config
+

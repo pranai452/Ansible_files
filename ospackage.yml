@@ -1,0 +1,18 @@
+---
+- name: using tags
+  hosts: local
+   
+  tasks:
+ #  - name: adding  user var demo
+  #   user: name= state=present
+   - name: installing package redhat servers
+     yum: name=httpd state=latest
+     when: ansible_os_family == "RedHat"
+   - name: restart httpd
+     service: name=httpd state=restarted
+     tags: testredhat
+   - name: installing packages on debain
+     apt: name=apache2 state=latest
+     when: ansible_os_family == "Debian"
+     tags: testdebian
+

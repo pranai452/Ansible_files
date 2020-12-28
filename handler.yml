@@ -1,0 +1,24 @@
+---
+- name: using tags
+  hosts: all
+   
+  tasks:
+   - name: adding  user var demo
+     user: name=test state=present
+   - name: installing package redhat servers
+     yum: name=httpd state=latest
+     when: ansible_os_family == "RedHat"
+     tags: testredhati
+     notify: restart httpd
+   - name: installing packages on debain
+     apt: name=apache2 state=latest
+     when: ansible_os_family == "Debian"
+     notify: restart apache2
+     tags: testdebian
+  handlers:
+   - name: restart httpd
+     service:
+       name: httpd
+       state: started
+   - name: restart apache2
+     service: name=apache2 state=started

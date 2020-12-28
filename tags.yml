@@ -1,0 +1,17 @@
+---
+- name: removing  httpd
+  hosts: all
+   
+  tasks:
+   - name: adding  user var demo
+     user: naem=testtags state=present
+     ignore_errors: True
+   - name: installing package redhat servers
+     yum: name=httpd state=latest
+     when: ansible_os_family == "RedHat"
+     tags: task1
+   - name: installing packages on debain
+     apt: name=apache2 state=latest
+     when: ansible_os_family == "Debian"
+     tags: task2
+

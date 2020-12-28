@@ -1,0 +1,13 @@
+---
+
+- name: file copy
+  hosts: all
+   
+  tasks:
+    - name: creating directory on both servers
+      file: name=/root/testcopy state=directory
+    - name: coping files form master to slaves
+      copy: src=/root/ansible-playbooks/test.txt dest=/root/testcopy mode=640 
+    - name: copying files from slave servers to masternode
+      fetch: src=/root/testcopy/shadow.txt dest=/root/ansible-plabooks
+      tags: test

@@ -1,0 +1,12 @@
+---
+- name: removing  httpd
+  hosts: all
+  vars_files:
+     "./vardemo.yml"
+   
+  tasks:
+   - name: adding  user var demo
+     user: name={{ user_name }} state=present
+   - name: installing elinks
+     yum: name={{ package_name }} state=latest
+

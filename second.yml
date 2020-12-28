@@ -1,0 +1,9 @@
+---
+- name: removing  httpd
+  hosts: slave02
+  tasks:
+   - name: removing user
+     user: name=ansibletest state=absent
+   - name: deleting httpd
+     yum: name=httpd state=absent
+

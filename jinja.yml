@@ -1,0 +1,14 @@
+---
+- name: testing jinja templte
+  hosts: redhat
+  tasks: 
+    - name: installing httpd and running
+      yum: name=httpd state=latest
+    - name: starting httpd service
+      service: name=httpd state=started
+    - name: testing jinja2
+      template:
+          src: /root/ansible-playbooks/index.html.j2
+          dest: /var/www/html/index.html
+    - name: restrting httpd
+      service: name=httpd state=restarted
